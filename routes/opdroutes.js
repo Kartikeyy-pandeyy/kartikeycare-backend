@@ -43,7 +43,7 @@ router.get("/generate-ticket/:ticketId", async (req, res) => {
         page.drawImage(backgroundImage, { x: 0, y: 0, width, height, opacity: 0.1 });
 
         // Add Header with Styling
-        page.drawText("Kartikey Care OPD Ticket", {
+        page.drawText("OPD Ticket", {
             x: 180,
             y: height - 60,
             size: 26,
@@ -140,7 +140,7 @@ details.forEach((text, index) => {
             color: rgb(0.5, 0.5, 0.5),
         });
 
-        page.drawText("Contact: +91 7388109688 | www.demo.com", {
+        page.drawText("Contact: +91 7388109688 | https://kartikeycare.vercel.app/", {
             x: 50,
             y: 35,
             size: 10,
