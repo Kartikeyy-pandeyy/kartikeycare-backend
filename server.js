@@ -10,33 +10,14 @@ connectDB();
 
 const app = express();
 
-// ✅ Secure and dynamic CORS policy
-const allowedOrigins = ["https://kartikeycare.vercel.app", "http://localhost:3000"];
-
-app.use(cors({
-    origin: (origin, callback) => {
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, origin);
-        } else {
-            callback(new Error("Not allowed by CORS"));
-        }
-    },
-    credentials: true,
-}));
+// ✅ Allow CORS from anywhere
+app.use(cors());
 
 app.use(express.json());
 
 // ✅ Register Routes
 app.use("/api/appointments", appointmentRoutes);
 app.use("/api/opd", opdRoutes);
-
-// ✅ Debug: Log all registered routes
-console.log("Registered Routes:");
-app._router.stack.forEach((r) => {
-    if (r.route && r.route.path) {
-        console.log(`${r.route.stack[0].method.toUpperCase()} ${r.route.path}`);
-    }
-});
 
 // ✅ Handle 404 Routes
 app.use((req, res) => {
