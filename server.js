@@ -1,4 +1,3 @@
-// server.js (Updated)
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
@@ -11,16 +10,33 @@ connectDB();
 
 const app = express();
 
+// ✅ Secure and dynamic CORS policy
+const allowedOrigins = ["https://kartikeycare.vercel.app", "http://localhost:3000"];
+
 app.use(cors({
-    origin: ["*", "http://localhost:3000"], // Add your frontend URL(s)
-    methods: ["GET", "POST", "PUT", "DELETE"], // Limit HTTP methods if needed
-    allowedHeaders: ["Content-Type", "Authorization"], // Restrict headers if needed
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, origin);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
+    credentials: true,
 }));
- // ✅ Secure CORS Policy (Adjust if needed)
+
 app.use(express.json());
 
+// ✅ Register Routes
 app.use("/api/appointments", appointmentRoutes);
 app.use("/api/opd", opdRoutes);
+
+// ✅ Debug: Log all registered routes
+console.log("Registered Routes:");
+app._router.stack.forEach((r) => {
+    if (r.route && r.route.path) {
+        console.log(`${r.route.stack[0].method.toUpperCase()} ${r.route.path}`);
+    }
+});
 
 // ✅ Handle 404 Routes
 app.use((req, res) => {
