@@ -12,7 +12,7 @@ connectDB();
 const app = express();
 
 app.use(cors({
-    origin: ["https://kartikeycare.vercel.app/", "http://localhost:3000"], // Add your frontend URL(s)
+    origin: ["*", "http://localhost:3000"], // Add your frontend URL(s)
     methods: ["GET", "POST", "PUT", "DELETE"], // Limit HTTP methods if needed
     allowedHeaders: ["Content-Type", "Authorization"], // Restrict headers if needed
 }));
