@@ -11,7 +11,14 @@ connectDB();
 const app = express();
 
 // ✅ Allow CORS from anywhere
-app.use(cors());
+app.use(
+    cors({
+      origin: "*", // Allow all origins (or specify frontend URL for security)
+      methods: "GET,POST,PUT,DELETE",
+      allowedHeaders: "Content-Type",
+    })
+  );
+  
 
 app.use(express.json());
 
