@@ -211,7 +211,7 @@ router.get("/generate-ticket/:ticketId", async (req, res) => {
 
     // Visit Guidelines Section
     const guidelines = [
-      "Please arrive 15 minutes prior to your scheduled slot with ID and medical records.",
+      "Please arrive 15 minutes prior to your scheduled slot.",
       "Adhere to social distancing and follow all hospital safety protocols.",
       "For assistance, contact our reception desk or call the emergency number.",
       "Emergency Contact: +91 7388109688",
